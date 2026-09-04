@@ -8,6 +8,7 @@
     "client": "vite",
     "server": "node server/server.js",
     "build": "vite build",
+    "deploy": "npm run build && touch dist/.nojekyll && git checkout -b gh-pages-temp && git add -f dist/ && git commit -m \"deploy: update gh-pages\" && git subtree push --prefix dist origin gh-pages && git checkout main && git branch -D gh-pages-temp",
     "start": "NODE_ENV=production node server/server.js"
   },
   "dependencies": {
