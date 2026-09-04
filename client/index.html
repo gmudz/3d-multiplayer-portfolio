@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Murad Ashkar (@gmudz) // 3D Interactive Cyber City &amp; Portfolio</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Segoe+UI:wght@400;600;700;800&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 3D Three.js WebGL Canvas Mount -->
+  <div id="canvas-container"></div>
+
+  <!-- Top HUD Bar -->
+  <header id="hud-top">
+    <div class="brand-badge glass">
+      <div class="brand-dot"></div>
+      <div class="brand-text-col">
+        <span id="brand-title" class="brand-title">MURAD ASHKAR // 3D CAMPUS</span>
+        <span id="brand-subtitle" class="brand-sub">Full-Stack Architect &amp; Systems Engineer</span>
+      </div>
+    </div>
+
+    <div class="top-right-group">
+      <!-- Quick Social Icons -->
+      <a href="https://github.com/gmudz" target="_blank" rel="noopener noreferrer" class="icon-btn glass" title="GitHub: @gmudz">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
+      <a href="mailto:mmuradashkar@gmail.com" class="icon-btn glass" title="Email: mmuradashkar@gmail.com">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Day / Sunset / Night Cycle Toggle -->
+      <button id="env-toggle-btn" class="status-pill glass env-pill" title="Toggle Lighting Mode (Day / Sunset / Night)">
+        <span id="env-mode-label">🌙 Night</span>
+      </button>
+
+      <!-- Language Switcher Toggle -->
+      <button id="lang-toggle-btn" class="status-pill glass lang-pill" title="Toggle Language (العربية / English)">
+        <span class="lang-globe">🌐</span>
+        <span id="lang-current-label">العربية</span>
+      </button>
+
+      <!-- Satellite Tactical Map Toggle Button -->
+      <button id="map-toggle-btn" class="status-pill glass map-pill" title="Toggle City Satellite Map (M)">
+        <span>🗺️</span>
+        <span id="map-btn-label">Map</span>
+      </button>
+
+      <!-- Pilot Badge -->
+      <div id="player-name-badge" class="status-pill glass pilot-badge">PILOT-1</div>
+
+      <!-- Online Pilots Count -->
+      <div class="status-pill glass">
+        <span id="ping-indicator" class="status-dot connecting"></span>
+        <span id="player-count">1 Pilot</span>
+      </div>
+
+      <!-- Audio Toggle -->
+      <button id="audio-toggle-btn" class="icon-btn glass" title="Toggle Sound">
+        <span id="audio-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Desktop Controls Reminder -->
+  <div id="hud-controls-helper">
+    <div class="hint-chip glass">
+      <span class="key-cap">W</span><span class="key-cap">A</span><span class="key-cap">S</span><span class="key-cap">D</span>
+      <span id="hint-drive-text">Drive / Steer</span>
+    </div>
+    <div class="hint-chip glass">
+      <span class="key-cap">SPACE</span>
+      <span id="hint-brake-text">Handbrake / Drift</span>
+    </div>
+    <div class="hint-chip glass">
+      <span class="key-cap">E</span>
+      <span id="hint-explore-text">Explore Station</span>
+    </div>
+  </div>
+
+  <!-- Speedometer Widget -->
+  <aside id="hud-speedometer" class="glass">
+    <div class="speed-row">
+      <span id="speed-value" class="speed-digits">0</span>
+      <span id="speed-unit-label" class="speed-unit">KM/H</span>
+      <span id="gear-indicator" class="gear-badge gear-p">P</span>
+    </div>
+    <div class="speed-bar-track">
+      <div id="speed-bar-fill"></div>
+    </div>
+  </aside>
+
+  <!-- Live Grand Prix HUD Lap Timer Widget -->
+  <aside id="hud-lap-timer" class="glass">
+    <div class="lap-timer-top">
+      <div class="lap-counter-pill">
+        <span class="lap-flag-icon">🏁</span>
+        <span id="lap-label-tag">LAP</span>
+        <strong id="lap-current-num">1</strong>
+      </div>
+      <div class="best-lap-display">
+        <span id="best-label-tag">BEST:</span>
+        <span id="best-time-val">--:--.---</span>
+      </div>
+    </div>
+    <div class="lap-timer-main">
+      <span id="current-lap-val" class="lap-digits">00:00.000</span>
+    </div>
+    <div class="lap-timer-sectors" id="lap-sectors-strip">
+      <span class="sector-dot s1">S1</span>
+      <span class="sector-dot s2">S2</span>
+      <span class="sector-dot s3">S3</span>
+      <span class="sector-dot s4">S4</span>
+    </div>
+  </aside>
+
+  <!-- Dynamic Drift Score Counter Widget -->
+  <div id="hud-drift-widget" class="glass hidden">
+    <div class="drift-flame">🔥</div>
+    <div class="drift-info">
+      <span id="drift-label-text" class="drift-title">DRIFT</span>
+      <div class="drift-score-row">
+        <span id="drift-points-val" class="drift-score">0</span>
+        <span id="drift-pts-label" class="drift-unit">PTS</span>
+        <span id="drift-mult-val" class="drift-multiplier">x1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebratory Finish Fanfare Banner -->
+  <div id="finish-celebration-banner" class="glass hidden">
+    <div class="finish-banner-content">
+      <div class="finish-trophy">🏆</div>
+      <div class="finish-text">
+        <h3 id="finish-title-text">🏁 NEW LAP RECORD!</h3>
+        <p id="finish-time-sub">Lap 1: 01:18.450</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interaction Proximity Prompt -->
+  <div id="interaction-prompt" class="glass hidden">
+    <div class="prompt-icon">
+      <span id="prompt-key-label">E</span>
+    </div>
+    <div class="prompt-text">
+      <span id="prompt-prefix">Parked at </span>
+      <strong id="prompt-project-title">Station</strong>
+      <span id="prompt-suffix" style="opacity: 0.75"> — Click or press E</span>
+    </div>
+  </div>
+
+  <!-- Autonomous Navigation Autopilot HUD Status Banner -->
+  <div id="autopilot-banner" class="glass hidden">
+    <div class="autopilot-banner-content">
+      <div class="autopilot-pulse-dot"></div>
+      <div class="autopilot-text-group">
+        <div class="autopilot-title-row">
+          <span id="ap-label-title">AUTOPILOT ACTIVE:</span>
+          <strong id="ap-dest-name">Destination</strong>
+        </div>
+        <span id="ap-hint-text" class="autopilot-cancel-hint">Press WASD or tap screen to cancel</span>
+      </div>
+      <button id="ap-cancel-btn" class="ap-cancel-btn" title="Cancel Autopilot">✕</button>
+    </div>
+  </div>
+
+  <!-- 1. Interactive Project Modal with Rich Media & SVG Logo -->
+  <div id="project-modal" class="hidden">
+    <div id="modal-card" class="glass">
+      <!-- Media Banner & Brand Header -->
+      <div id="modal-banner-container" class="modal-banner">
+        <div id="modal-logo-container" class="modal-logo-badge"></div>
+        <div class="modal-banner-chips">
+          <span id="modal-status-badge" class="status-chip">Production</span>
+          <span id="modal-category" class="category-chip">CATEGORY</span>
+        </div>
+      </div>
+
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="modal-title">Project Title</h2>
+          <p id="modal-tagline">Tagline goes here</p>
+        </div>
+        <button id="modal-close-btn" class="modal-close" aria-label="Close Project">&times;</button>
+      </div>
+
+      <!-- Verified Role & Scope -->
+      <div class="modal-role-pill">
+        <span class="role-label" id="modal-role-label">Role:</span>
+        <strong id="modal-role-val">Founder &amp; Technical Lead</strong>
+      </div>
+
+      <p id="modal-summary">Summary paragraph describing the project.</p>
+
+      <div class="modal-section">
+        <div class="modal-section-title" id="modal-sec-highlights">Architecture Highlights</div>
+        <ul id="modal-highlights"></ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title" id="modal-sec-metrics">Scale &amp; Performance Metrics</div>
+        <div id="modal-metrics"></div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title" id="modal-sec-tech">Technologies &amp; Frameworks</div>
+        <div id="modal-tech-stack"></div>
+      </div>
+
+      <div class="modal-actions">
+        <a id="modal-link-demo" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span id="btn-label-demo">Live Platform</span>
+        </a>
+        <a id="modal-link-github" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span id="btn-label-github">Source Code</span>
+        </a>
+        <a id="modal-link-casestudy" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span id="btn-label-case">Case Study</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Tech Stack Monolith Modal -->
+  <div id="monolith-modal" class="hidden">
+    <div id="monolith-card" class="glass">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-badge-cyan" id="monolith-badge-label">CENTRAL TECH MONOLITH</div>
+          <h2 id="monolith-title">Core Technical Arsenal</h2>
+          <p id="monolith-subtitle">Specialized engineering proficiency</p>
+        </div>
+        <button id="monolith-close-btn" class="modal-close" aria-label="Close Monolith">&times;</button>
+      </div>
+
+      <div id="monolith-grid" class="monolith-grid"></div>
+    </div>
+  </div>
+
+  <!-- 3. Waypoint Milestone Modal -->
+  <div id="waypoint-modal" class="hidden">
+    <div id="waypoint-card" class="glass">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-badge-amber" id="waypoint-badge-label">CAREER MILESTONE</div>
+          <h2 id="waypoint-title">Title</h2>
+          <div class="waypoint-meta">
+            <strong id="waypoint-org">Organization</strong>
+            <span id="waypoint-period">Period</span>
+          </div>
+        </div>
+        <button id="waypoint-close-btn" class="modal-close" aria-label="Close Waypoint">&times;</button>
+      </div>
+
+      <p id="waypoint-desc">Description of role and achievements.</p>
+    </div>
+  </div>
+
+  <!-- Tactical Satellite Map Overlay -->
+  <div id="map-overlay" class="hidden">
+    <div class="map-hud-header glass">
+      <div class="map-title-row">
+        <span class="map-radar-icon">🛰️</span>
+        <div class="map-text-col">
+          <h2 id="map-title">CYBER CITY TACTICAL SATELLITE RADAR</h2>
+          <p id="map-subtitle">Click any district or landmark to engage Autonomous Navigation</p>
+        </div>
+      </div>
+      <button id="map-close-btn" class="modal-close" aria-label="Close Map">&times;</button>
+    </div>
+
+    <!-- Dynamic 2D Projected Holographic Radar Pins -->
+    <div id="map-markers-layer"></div>
+
+    <div class="map-hud-footer glass">
+      <div class="map-hint-text">
+        <span class="pulse-dot"></span>
+        <span id="map-hint-instruction">Select destination waypoint // Press [M] or [ESC] to return</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile On-Screen Virtual Touch Controls with localized buttons -->
+  <div id="touch-controls">
+    <div id="joystick-zone">
+      <div id="joystick-base">
+        <div id="joystick-knob"></div>
+      </div>
+    </div>
+    <div id="touch-actions">
+      <button id="btn-rev" class="touch-btn">REV</button>
+      <button id="btn-brake" class="touch-btn">BRAKE</button>
+      <button id="btn-gas" class="touch-btn">GAS</button>
+    </div>
+  </div>
+
+  <!-- Frontend Logic Entry -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

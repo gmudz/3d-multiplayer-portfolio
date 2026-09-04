@@ -1,0 +1,25 @@
+{
+  "name": "3d-multiplayer-portfolio",
+  "version": "1.0.0",
+  "description": "Interactive 3D Low-Poly Multiplayer Portfolio Web Game using Three.js and Node.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run server\" \"npm run client\"",
+    "client": "vite",
+    "server": "node server/server.js",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lucide": "^0.475.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "three": "^0.173.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "vite": "^6.1.1"
+  }
+}
