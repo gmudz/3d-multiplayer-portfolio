@@ -1,12 +1,26 @@
 # 🏙️ CyberCity: Murad Ashkar (@gmudz) // 3D Interactive WebGL Portfolio & Grand Prix Game
 
-[![Three.js](https://img.shields.io/badge/Three.js-r173-black?style=flat&logo=three.js)](https://threejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.1-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-v20-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Socket.io](https://img.shields.io/badge/Socket.io-4.8-010101?style=flat&logo=socket.io&logoColor=white)](https://socket.io/)
-[![WebGL](https://img.shields.io/badge/WebGL-60_FPS_Locked-00f0ff?style=flat&logo=webgl&logoColor=white)](https://get.webgl.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Bilingual](https://img.shields.io/badge/i18n-English_%2F_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-green)](https://github.com/gmudz)
+<p align="center">
+  <a href="https://gmudz.github.io/3d-multiplayer-portfolio/">
+    <img src="./media/cyber_city_hero_banner.jpg" alt="CyberCity 3D WebGL Portfolio & Grand Prix Game Hero Banner" width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://gmudz.github.io/3d-multiplayer-portfolio/"><img src="https://img.shields.io/badge/Play%20Live%20Demo-GitHub%20Pages-00f0ff?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo"></a>
+  <a href="http://wmudz.me/3d-multiplayer-portfolio/"><img src="https://img.shields.io/badge/Custom%20Domain-wmudz.me-7928CA?style=for-the-badge&logo=safari&logoColor=white" alt="Custom Domain"></a>
+  <a href="https://github.com/gmudz/3d-multiplayer-portfolio"><img src="https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo"></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Three.js-r173-black?style=flat&logo=three.js" alt="Three.js">
+  <img src="https://img.shields.io/badge/Vite-6.1-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/Node.js-v20-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Socket.io-4.8-010101?style=flat&logo=socket.io&logoColor=white" alt="Socket.io">
+  <img src="https://img.shields.io/badge/WebGL-60_FPS_Locked-00f0ff?style=flat&logo=webgl&logoColor=white" alt="WebGL">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/i18n-English_%2F_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-green" alt="Bilingual">
+</p>
 
 An expansive, production-ready **3D Urban Cyber City Portfolio Web Game** engineered by **Murad Ashkar (@gmudz)**. Built with **Three.js** on the WebGL frontend and **Node.js + Express + Socket.io** for real-time multiplayer telemetry.
 
@@ -61,6 +75,10 @@ npm start
 
 ## 🏙️ Urban Districts & Corporate Landmarks
 
+<p align="center">
+  <img src="./media/corporate_landmarks_showcase.jpg" alt="Corporate Landmarks & Architectural Facilities Showcase" width="100%">
+</p>
+
 The metropolis is divided into functional enterprise sectors connected by Grand Avenues:
 
 ```
@@ -102,12 +120,28 @@ The metropolis is divided into functional enterprise sectors connected by Grand 
 
 ## 🏎️ Grand Prix City Street Circuit
 
+<p align="center">
+  <img src="./media/grand_prix_action.jpg" alt="Grand Prix Downtown Street Circuit Action & Lateral Drift Physics" width="100%">
+</p>
+
 - **Spline Circuit**: 12-control-point closed Catmull-Rom curve winding through North Avenue, Downtown Chicane, East Expressway ramp, South AI Quarter, Roundabout, and Silicon Park.
 - **Start/Finish Gantry**: Located on North Avenue at `(0, 0.22, -68)` with checkered finish line decal and 5-stage animated LED starting lights.
 - **F1 Timing Telemetry**:
   - 6 sequential checkpoints preventing track cutting.
   - Live lap timer, sector split differentials, and best lap persistence in `localStorage` (`gmudz_gp_best_lap`).
   - Dynamic drift score calculator with combo multiplier widget.
+
+---
+
+## 🗺️ Tactical Satellite Radar & Autonomous Autopilot
+
+<p align="center">
+  <img src="./media/tactical_radar_map.jpg" alt="Tactical Satellite Radar Map & Autonomous GPS Navigation HUD" width="100%">
+</p>
+
+- **Holographic Satellite Map Overlay (`M` Key / HUD button)**: Live top-down 2D screen projection of the $300\text{m} \times 300\text{m}$ metropolis showing Grand Avenues, the Expressway ring, the Grand Prix circuit path, corporate landmarks, and real-time player telemetry blip.
+- **Autonomous Navigation Autopilot**: Click any destination landmark on the tactical map or press `[ Autopilot ]` to engage self-driving. A Dijkstra graph solver computes optimal avenue waypoints and drives the cyber car with a pure pursuit steering controller.
+- **Instant Manual Override**: Seamlessly disengages whenever manual steering, gas, or brake input is detected.
 
 ---
 
@@ -179,6 +213,11 @@ The metropolis is divided into functional enterprise sectors connected by Grand 
 │   ├── index.html              # Single-page application root HTML
 │   ├── main.js                 # Application entry point & render loop
 │   └── style.css               # Cyberpunk glassmorphic styling & RTL layout
+├── media/                      # High-resolution showcase & gameplay screenshots
+│   ├── cyber_city_hero_banner.jpg
+│   ├── corporate_landmarks_showcase.jpg
+│   ├── grand_prix_action.jpg
+│   └── tactical_radar_map.jpg
 ├── server/
 │   ├── README.md               # Backend documentation
 │   └── server.js               # Express static host & 25 Hz Socket.io tick loop

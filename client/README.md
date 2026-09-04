@@ -1,5 +1,9 @@
 # 🎮 CyberCity Client Architecture (Three.js WebGL)
 
+<p align="center">
+  <img src="../media/cyber_city_hero_banner.jpg" alt="CyberCity Client Architecture & Metropolis Render" width="100%">
+</p>
+
 This directory contains the entire frontend client for the **CyberCity 3D WebGL Portfolio & Grand Prix Web Game**.
 
 ---
@@ -63,6 +67,10 @@ client/
 
 ## 4. Grand Prix City Circuit (`RaceTrack.js` & `LapTimer.js`)
 
+<p align="center">
+  <img src="../media/grand_prix_action.jpg" alt="Grand Prix Downtown Street Circuit Action" width="100%">
+</p>
+
 - **12-Point Spline Circuit**: Catmull-Rom closed curve winding through North Avenue, Downtown Chicane, Outer Ring Expressway, Telecom Quarter, and Silicon Park.
 - **Asphalt Road Deck**: 10m wide roadway with inward banking on high-speed sweepers, alternating red/white apex kerbs, and tire barrier stacks.
 - **Start/Finish Gantry**: Located at `(0, 0.22, -68)` with 5-stage animated LED starting sequence.
@@ -71,6 +79,10 @@ client/
 ---
 
 ## 5. Autonomous Navigation Autopilot (`Autopilot.js`)
+
+<p align="center">
+  <img src="../media/tactical_radar_map.jpg" alt="Tactical Satellite Radar Map & Autopilot Waypoints" width="100%">
+</p>
 
 - **Navigation Graph**: Interconnected nodes covering roundabout, avenues, highway ramps, and corporate landmark plazas.
 - **Dijkstra Pathfinding**: Computes the shortest path between any vehicle position and any destination landmark.
