@@ -8,7 +8,7 @@
     "client": "vite",
     "server": "node server/server.js",
     "build": "vite build",
-    "deploy": "npm run build && touch dist/.nojekyll && git checkout -b gh-pages-temp && git add -f dist/ && git commit -m \"deploy: update gh-pages\" && git subtree push --prefix dist origin gh-pages && git checkout main && git branch -D gh-pages-temp",
+    "deploy": "npm run build && touch dist/.nojekyll && git -C dist init && git -C dist checkout -B gh-pages && git -C dist add -A && git -C dist commit -m \"deploy: update gh-pages\" && git -C dist push -f https://github.com/gmudz/3d-multiplayer-portfolio.git gh-pages && rm -rf dist/.git",
     "start": "NODE_ENV=production node server/server.js"
   },
   "dependencies": {
